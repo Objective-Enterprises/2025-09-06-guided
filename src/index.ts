@@ -94,3 +94,37 @@ const vehicle = {
 }
 const vehicleSpeed = magicalInventory.getProperty(vehicle, 'speed')
 console.log('vehicleSpeed', vehicleSpeed)
+
+
+
+interface Shelves {
+  top: {
+    size: 'big'
+    contents: string[]
+  }
+  middle: {
+    size: 'medium' | 'small',
+    contents: string
+  }
+  bottom: {
+    size: 'tiny'
+    contents: null
+  }
+}
+
+const shelves: Shelves = {
+  top: {
+    size: 'big',
+    contents: ['papers', 'books', 'pencils']
+  },
+  middle: {
+    size: 'medium',
+    contents: 'drinks'
+  },
+  bottom: { size: 'tiny', contents: null }
+}
+
+function getContents <K extends keyof Shelves> (shelf: K): Shelves[K]['contents'] {
+  return shelves.top.contents
+}
+const contents = getContents('middle')
