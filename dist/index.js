@@ -13,10 +13,6 @@ class MagicalItem {
         console.log(message);
     }
 }
-const boots = new MagicalItem('Boots of Strength', 'armor', 9001, true);
-boots.displayInfo();
-const sword = new MagicalItem('Sword of Speed', 'weapon', 9003, false);
-sword.displayInfo();
 // Function to compare power levels of two items
 function comparePower(item1, item2) {
     if (item1.powerLevel > item2.powerLevel) {
@@ -25,10 +21,48 @@ function comparePower(item1, item2) {
     return item2.name;
 }
 // Generic class for inventory
+class Inventory {
+    constructor() {
+        this.items = [];
+    }
+    add(item) {
+        this.items.push(item);
+    }
+    getAll() {
+        return this.items;
+    }
+    getProperty(item, key) {
+        const value = item[key];
+        return value;
+    }
+}
+// const numberInventory = new Inventory<number>()
+// numberInventory.add(boots)
+function getProperty(item, key) {
+    const value = item[key];
+    return value;
+}
+// Example items
+const boots = new MagicalItem('Boots of Strength', 'armor', 9001, true);
+const sword = new MagicalItem('Sword of Speed', 'weapon', 9003, false);
+// Create inventory and add items
+const magicalInventory = new Inventory();
+magicalInventory.add(boots);
+magicalInventory.add(sword);
+// Display all item info
+const items = magicalInventory.getAll();
+for (const item of items) {
+    item.displayInfo();
+}
+// Compare power levels
 const powerfulName = comparePower(boots, sword);
 console.log('powerfulName', powerfulName);
-// Example items
-// Create inventory and add items
-// Display all item info
-// Compare power levels
 // Access property using keyof
+const bootsPower = magicalInventory.getProperty(boots, 'powerLevel');
+console.log('bootsPower', bootsPower);
+const vehicle = {
+    position: 0,
+    speed: 100
+};
+const vehicleSpeed = getProperty(vehicle, 'speed');
+console.log('vehicleSpeed', vehicleSpeed);
